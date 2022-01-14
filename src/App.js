@@ -1,15 +1,22 @@
 import { Button } from "react-bootstrap";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementHandler } from "./redux/action";
+import { DecrementHandler, incrementHandler, resetHandler } from "./redux/action";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   //call the action
   const handelIncrement = () => {
     dispatch(incrementHandler());
   };
 
+  const handelDecrement=()=>{
+    dispatch(DecrementHandler())
+  }
+
+  const handelReset=()=>{
+    dispatch(resetHandler())
+  }
   // import the global state from the global store
   const counter = useSelector((state) => state.counter);
   console.log(counter);
@@ -17,13 +24,13 @@ function App() {
   return (
     <div className="counter">
       <div className="btns">
-        <Button> - </Button>
+        <Button onClick={handelDecrement} > - </Button>
         <Button variant="danger" size="lg">
           {counter}
         </Button>
         <Button onClick={handelIncrement}> + </Button>
       </div>
-      <Button>reset</Button>
+      <Button onClick={handelReset} >reset</Button>
     </div>
   );
 }
